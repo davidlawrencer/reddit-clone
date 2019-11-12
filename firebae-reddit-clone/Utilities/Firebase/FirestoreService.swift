@@ -9,6 +9,12 @@
 import Foundation
 import FirebaseFirestore
 
+enum FireStoreCollections: String {
+    case users
+    case posts
+    case comments
+}
+
 class FirestoreService {    
     static let manager = FirestoreService()
     
@@ -16,7 +22,7 @@ class FirestoreService {
     
     //MARK: AppUsers
     func createAppUser(user: AppUser, completion: @escaping (Result<(), Error>) -> ()) {
-        db.collection("users").document(user.uid).setData(user.fieldsDict) { (error) in
+        db.collection(FireStoreCollections.users.rawValue).document(user.uid).setData(user.fieldsDict) { (error) in
             if let error = error {
                 completion(.failure(error))
                 print(error)
@@ -26,7 +32,7 @@ class FirestoreService {
     }
     
     func getAllUsers(completion: @escaping (Result<[AppUser], Error>) -> ()) {
-        db.collection("users").getDocuments { (snapshot, error) in
+        db.collection(FireStoreCollections.users.rawValue).getDocuments { (snapshot, error) in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -42,7 +48,7 @@ class FirestoreService {
     
     //MARK: Posts
     func createPost(post: Post, completion: @escaping (Result<(), Error>) -> ()) {
-        db.collection("posts").addDocument(data: post.fieldsDict) { (error) in
+        db.collection(FireStoreCollections.posts.rawValue).addDocument(data: post.fieldsDict) { (error) in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -52,7 +58,7 @@ class FirestoreService {
     }
     
     func getAllPosts(completion: @escaping (Result<[Post], Error>) -> ()) {
-        db.collection("posts").getDocuments { (snapshot, error) in
+        db.collection(FireStoreCollections.posts.rawValue).getDocuments { (snapshot, error) in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -71,8 +77,15 @@ class FirestoreService {
     }
     
     //MARK: Comments
+    
     func createComment(comment: Comment, completion: @escaping (Result<(), Error>) -> ()) {
-        
+        db.collection(FireStoreCollections.comments.rawValue).addDocument(data: comment.fieldsDict) { (error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
     }
     
     func getComments(forPostID: String, completion: @escaping (Result<[Comment], Error>) -> ()) {

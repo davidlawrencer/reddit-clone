@@ -12,5 +12,6 @@ enum CellIdentifier: String {
     case postListCell
     case userListCell
     case postHeaderCell
+    case userHeaderCel
     case commentCell
 }
