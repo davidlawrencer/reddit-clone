@@ -14,7 +14,7 @@ class CreatePostViewController: UIViewController {
     
     lazy var titleTextField: UITextField = {
         let textField = UITextField()
-        textField.layer.borderColor = UIColor.black.cgColor
+        textField.layer.borderColor = UIColor(red: 255/255, green: 86/255, blue: 0/255, alpha: 1).cgColor
         textField.layer.borderWidth = 1
         textField.backgroundColor = .white
         textField.placeholder = "Title"
@@ -25,7 +25,7 @@ class CreatePostViewController: UIViewController {
     lazy var bodyTextView: UITextView = {
         let textView = UITextView()
         textView.isEditable = true
-        textView.layer.borderColor = UIColor.black.cgColor
+        textView.layer.borderColor = UIColor(red: 255/255, green: 86/255, blue: 0/255, alpha: 1).cgColor
         textView.layer.borderWidth = 1
         textView.font = UIFont(name: "Verdana", size: 14)
         return textView
@@ -33,10 +33,10 @@ class CreatePostViewController: UIViewController {
     
     lazy var postButton: UIButton = {
        let button = UIButton()
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.showsTouchWhenHighlighted = true
         button.isEnabled = true
-        button.backgroundColor = .gray
+        button.backgroundColor = UIColor(red: 255/255, green: 86/255, blue: 0/255, alpha: 1)
         button.setTitle("Post", for: .normal)
         button.titleLabel?.font = UIFont(name: "Verdana-Bold", size: 20)
         button.addTarget(self, action: #selector(postButtonPressed), for: .touchUpInside)

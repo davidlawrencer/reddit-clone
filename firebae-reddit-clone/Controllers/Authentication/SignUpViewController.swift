@@ -62,7 +62,7 @@ class SignUpViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("Create", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont(name: "Verdana", size: 14)
+        button.titleLabel?.font = UIFont(name: "Verdana-Bold", size: 14)
         button.backgroundColor = UIColor(red: 255/255, green: 67/255, blue: 0/255, alpha: 1)
         button.layer.cornerRadius = 5
         button.addTarget(self, action: #selector(trySignUp), for: .touchUpInside)
