@@ -7,14 +7,16 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        FirebaseApp.configure()
+        UINavigationBar.appearance().tintColor = UIColor(red: 255/255, green: 86/255, blue: 0/255, alpha: 1)
+        UITabBar.appearance().tintColor = UIColor(red: 255/255, green: 86/255, blue: 0/255, alpha: 1)
         return true
     }
 
@@ -31,7 +33,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
-
 }
 

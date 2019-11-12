@@ -3,10 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		545727FE237AAAD80077A359 /* UsersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545727FD237AAAD80077A359 /* UsersListViewController.swift */; };
+		54572800237AAAE50077A359 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545727FF237AAAE50077A359 /* UserProfileViewController.swift */; };
+		54572802237AAAF20077A359 /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54572801237AAAF20077A359 /* CreatePostViewController.swift */; };
+		54572804237AAAFC0077A359 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54572803237AAAFC0077A359 /* PostDetailViewController.swift */; };
+		54572808237AACB50077A359 /* RedditTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54572807237AACB50077A359 /* RedditTabBarViewController.swift */; };
 		54629438237A6CF7001BDC6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54629437237A6CF7001BDC6B /* AppDelegate.swift */; };
 		5462943A237A6CF7001BDC6B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54629439237A6CF7001BDC6B /* SceneDelegate.swift */; };
 		5462943C237A6CF7001BDC6B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5462943B237A6CF7001BDC6B /* LoginViewController.swift */; };
@@ -15,9 +20,23 @@
 		5462944C237A6DCD001BDC6B /* String+Validations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5462944B237A6DCD001BDC6B /* String+Validations.swift */; };
 		5462944E237A793B001BDC6B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5462944D237A793B001BDC6B /* SignUpViewController.swift */; };
 		54629452237A8031001BDC6B /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54629451237A8031001BDC6B /* FirebaseAuthService.swift */; };
+		54629459237A83CE001BDC6B /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54629458237A83CE001BDC6B /* FirestoreService.swift */; };
+		5462945E237A859B001BDC6B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5462945D237A859B001BDC6B /* GoogleService-Info.plist */; };
+		54629460237A8A4A001BDC6B /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5462945F237A8A4A001BDC6B /* Post.swift */; };
+		54629462237A8BBC001BDC6B /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54629461237A8BBC001BDC6B /* AppUser.swift */; };
+		54629466237A9554001BDC6B /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54629465237A9554001BDC6B /* Comment.swift */; };
+		5462946C237A9D9C001BDC6B /* PostsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5462946B237A9D9C001BDC6B /* PostsListViewController.swift */; };
+		5462946E237AA000001BDC6B /* CellIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5462946D237AA000001BDC6B /* CellIdentifiers.swift */; };
+		77BD56AEAF59D01A018FA247 /* Pods_firebae_reddit_clone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59A38FF5C274F741E062D70F /* Pods_firebae_reddit_clone.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1783D2E08FF672BCD41C0D54 /* Pods-firebae-reddit-clone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-firebae-reddit-clone.release.xcconfig"; path = "Target Support Files/Pods-firebae-reddit-clone/Pods-firebae-reddit-clone.release.xcconfig"; sourceTree = "<group>"; };
+		545727FD237AAAD80077A359 /* UsersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListViewController.swift; sourceTree = "<group>"; };
+		545727FF237AAAE50077A359 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		54572801237AAAF20077A359 /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
+		54572803237AAAFC0077A359 /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
+		54572807237AACB50077A359 /* RedditTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditTabBarViewController.swift; sourceTree = "<group>"; };
 		54629434237A6CF7001BDC6B /* firebae-reddit-clone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "firebae-reddit-clone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		54629437237A6CF7001BDC6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		54629439237A6CF7001BDC6B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -28,6 +47,15 @@
 		5462944B237A6DCD001BDC6B /* String+Validations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Validations.swift"; sourceTree = "<group>"; };
 		5462944D237A793B001BDC6B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		54629451237A8031001BDC6B /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
+		54629458237A83CE001BDC6B /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
+		5462945D237A859B001BDC6B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5462945F237A8A4A001BDC6B /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		54629461237A8BBC001BDC6B /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
+		54629465237A9554001BDC6B /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		5462946B237A9D9C001BDC6B /* PostsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsListViewController.swift; sourceTree = "<group>"; };
+		5462946D237AA000001BDC6B /* CellIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellIdentifiers.swift; sourceTree = "<group>"; };
+		59A38FF5C274F741E062D70F /* Pods_firebae_reddit_clone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_firebae_reddit_clone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACEE5D455ADFEE3E018AE33B /* Pods-firebae-reddit-clone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-firebae-reddit-clone.debug.xcconfig"; path = "Target Support Files/Pods-firebae-reddit-clone/Pods-firebae-reddit-clone.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,17 +63,47 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77BD56AEAF59D01A018FA247 /* Pods_firebae_reddit_clone.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C9B69185E087B747074BDDC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				59A38FF5C274F741E062D70F /* Pods_firebae_reddit_clone.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		54572809237AB4F20077A359 /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				545727FD237AAAD80077A359 /* UsersListViewController.swift */,
+				545727FF237AAAE50077A359 /* UserProfileViewController.swift */,
+			);
+			path = Users;
+			sourceTree = "<group>";
+		};
+		5457280A237AB4FB0077A359 /* Posts */ = {
+			isa = PBXGroup;
+			children = (
+				5462946B237A9D9C001BDC6B /* PostsListViewController.swift */,
+				54572801237AAAF20077A359 /* CreatePostViewController.swift */,
+				54572803237AAAFC0077A359 /* PostDetailViewController.swift */,
+			);
+			path = Posts;
+			sourceTree = "<group>";
+		};
 		5462942B237A6CF7001BDC6B = {
 			isa = PBXGroup;
 			children = (
 				54629436237A6CF7001BDC6B /* firebae-reddit-clone */,
 				54629435237A6CF7001BDC6B /* Products */,
+				8DF21E9F86BF015DE08125CB /* Pods */,
+				1C9B69185E087B747074BDDC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -61,10 +119,12 @@
 			isa = PBXGroup;
 			children = (
 				54629453237A808D001BDC6B /* Controllers */,
+				54629467237A98F6001BDC6B /* Models */,
 				54629454237A8095001BDC6B /* Supporting Files */,
 				54629455237A80A8001BDC6B /* Utilities */,
 				54629440237A6CF8001BDC6B /* Assets.xcassets */,
 				54629445237A6CF8001BDC6B /* Info.plist */,
+				5462945D237A859B001BDC6B /* GoogleService-Info.plist */,
 			);
 			path = "firebae-reddit-clone";
 			sourceTree = "<group>";
@@ -72,8 +132,10 @@
 		54629453237A808D001BDC6B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				5462943B237A6CF7001BDC6B /* LoginViewController.swift */,
-				5462944D237A793B001BDC6B /* SignUpViewController.swift */,
+				54572807237AACB50077A359 /* RedditTabBarViewController.swift */,
+				5462946A237A992C001BDC6B /* Authentication */,
+				5457280A237AB4FB0077A359 /* Posts */,
+				54572809237AB4F20077A359 /* Users */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -91,8 +153,9 @@
 		54629455237A80A8001BDC6B /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				54629456237A80B0001BDC6B /* Firebase */,
+				5462946D237AA000001BDC6B /* CellIdentifiers.swift */,
 				54629457237A80BA001BDC6B /* Extensions */,
+				54629456237A80B0001BDC6B /* Firebase */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -101,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				54629451237A8031001BDC6B /* FirebaseAuthService.swift */,
+				54629458237A83CE001BDC6B /* FirestoreService.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -113,6 +177,34 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		54629467237A98F6001BDC6B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				54629461237A8BBC001BDC6B /* AppUser.swift */,
+				54629465237A9554001BDC6B /* Comment.swift */,
+				5462945F237A8A4A001BDC6B /* Post.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5462946A237A992C001BDC6B /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				5462943B237A6CF7001BDC6B /* LoginViewController.swift */,
+				5462944D237A793B001BDC6B /* SignUpViewController.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		8DF21E9F86BF015DE08125CB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				ACEE5D455ADFEE3E018AE33B /* Pods-firebae-reddit-clone.debug.xcconfig */,
+				1783D2E08FF672BCD41C0D54 /* Pods-firebae-reddit-clone.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -120,9 +212,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 54629448237A6CF8001BDC6B /* Build configuration list for PBXNativeTarget "firebae-reddit-clone" */;
 			buildPhases = (
+				70E16466E75D16D5F70392EB /* [CP] Check Pods Manifest.lock */,
 				54629430237A6CF7001BDC6B /* Sources */,
 				54629431237A6CF7001BDC6B /* Frameworks */,
 				54629432237A6CF7001BDC6B /* Resources */,
+				FF5F85E338F4FB7A5178D599 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -172,22 +266,76 @@
 			buildActionMask = 2147483647;
 			files = (
 				54629444237A6CF8001BDC6B /* LaunchScreen.storyboard in Resources */,
+				5462945E237A859B001BDC6B /* GoogleService-Info.plist in Resources */,
 				54629441237A6CF8001BDC6B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		70E16466E75D16D5F70392EB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-firebae-reddit-clone-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FF5F85E338F4FB7A5178D599 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-firebae-reddit-clone/Pods-firebae-reddit-clone-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-firebae-reddit-clone/Pods-firebae-reddit-clone-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-firebae-reddit-clone/Pods-firebae-reddit-clone-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		54629430237A6CF7001BDC6B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54629459237A83CE001BDC6B /* FirestoreService.swift in Sources */,
+				54629462237A8BBC001BDC6B /* AppUser.swift in Sources */,
+				545727FE237AAAD80077A359 /* UsersListViewController.swift in Sources */,
 				5462943C237A6CF7001BDC6B /* LoginViewController.swift in Sources */,
+				54572802237AAAF20077A359 /* CreatePostViewController.swift in Sources */,
 				5462944C237A6DCD001BDC6B /* String+Validations.swift in Sources */,
+				54629460237A8A4A001BDC6B /* Post.swift in Sources */,
+				54629466237A9554001BDC6B /* Comment.swift in Sources */,
+				54572800237AAAE50077A359 /* UserProfileViewController.swift in Sources */,
+				5462946E237AA000001BDC6B /* CellIdentifiers.swift in Sources */,
 				54629438237A6CF7001BDC6B /* AppDelegate.swift in Sources */,
+				54572804237AAAFC0077A359 /* PostDetailViewController.swift in Sources */,
 				5462943A237A6CF7001BDC6B /* SceneDelegate.swift in Sources */,
+				5462946C237A9D9C001BDC6B /* PostsListViewController.swift in Sources */,
 				54629452237A8031001BDC6B /* FirebaseAuthService.swift in Sources */,
+				54572808237AACB50077A359 /* RedditTabBarViewController.swift in Sources */,
 				5462944E237A793B001BDC6B /* SignUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -322,6 +470,7 @@
 		};
 		54629449237A6CF8001BDC6B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ACEE5D455ADFEE3E018AE33B /* Pods-firebae-reddit-clone.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -339,6 +488,7 @@
 		};
 		5462944A237A6CF8001BDC6B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1783D2E08FF672BCD41C0D54 /* Pods-firebae-reddit-clone.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

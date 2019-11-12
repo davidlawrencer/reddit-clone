@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
     
-    //MARK: UI
+    //MARK: UI Objects
     
     lazy var logoLabel: UILabel = {
         let label = UILabel()
@@ -29,6 +30,7 @@ class LoginViewController: UIViewController {
         textField.font = UIFont(name: "Verdana", size: 14)
         textField.backgroundColor = .white
         textField.borderStyle = .bezel
+        textField.autocorrectionType = .no
         textField.addTarget(self, action: #selector(validateFields), for: .editingChanged)
         return textField
     }()
@@ -36,10 +38,11 @@ class LoginViewController: UIViewController {
     lazy var passwordTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter Password"
-        textField.isSecureTextEntry = true
         textField.font = UIFont(name: "Verdana", size: 14)
         textField.backgroundColor = .white
         textField.borderStyle = .bezel
+        textField.autocorrectionType = .no
+        textField.isSecureTextEntry = true
         textField.addTarget(self, action: #selector(validateFields), for: .editingChanged)
         return textField
     }()
@@ -51,7 +54,7 @@ class LoginViewController: UIViewController {
         button.titleLabel?.font = UIFont(name: "Verdana", size: 14)
         button.backgroundColor = UIColor(red: 255/255, green: 67/255, blue: 0/255, alpha: 1)
         button.layer.cornerRadius = 5
-        // button.addTarget(self, action: #selector(tryLogin), for: .touchUpInside)
+        button.addTarget(self, action: #selector(tryLogin), for: .touchUpInside)
         button.isEnabled = false
         return button
     }()
@@ -66,6 +69,7 @@ class LoginViewController: UIViewController {
     }()
     
     //MARK: Lifecycle methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 198/255, green: 198/255, blue: 198/255, alpha: 1)
@@ -73,8 +77,9 @@ class LoginViewController: UIViewController {
     }
     
     //MARK: Obj-C methods
+    
     @objc func validateFields() {
-        guard let email = emailTextField.text, !email.isEmpty && email.isValidEmail , let password =  passwordTextField.text, !password.isEmpty && password.isValidPassword else {
+        guard emailTextField.hasText, passwordTextField.hasText else {
             loginButton.backgroundColor = UIColor(red: 255/255, green: 67/255, blue: 0/255, alpha: 0.5)
             loginButton.isEnabled = false
             return
@@ -89,7 +94,53 @@ class LoginViewController: UIViewController {
         present(signupVC, animated: true, completion: nil)
     }
     
+    @objc func tryLogin() {
+        guard let email = emailTextField.text, let password = passwordTextField.text else {
+            showAlert(with: "Error", and: "Please fill out all fields.")
+            return
+        }
+        
+        guard email.isValidEmail else {
+            showAlert(with: "Error", and: "Please enter a valid email")
+            return
+        }
+        
+        guard password.isValidPassword else {
+            showAlert(with: "Error", and: "Please enter a valid password. Passwords must have at least 8 characters.")
+            return
+        }
+        
+        FirebaseAuthService.manager.loginUser(email: email.lowercased(), password: password) { (result) in
+            self.handleLoginResponse(with: result)
+        }
+    }
+    
     //MARK: Private methods
+    
+    private func showAlert(with title: String, and message: String) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alertVC, animated: true, completion: nil)
+    }
+    
+    private func handleLoginResponse(with result: Result<User, Error>) {
+        switch result {
+        case .failure(let error):
+            showAlert(with: "Error", and: "Could not log in. Error: \(error)")
+        case .success:
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                let sceneDelegate = windowScene.delegate as? SceneDelegate
+                else {
+                    return
+            }
+            UIView.transition(with: self.view, duration: 0.1, options: .transitionFlipFromBottom, animations: {
+                sceneDelegate.window?.rootViewController = RedditTabBarViewController()
+            }, completion: nil)
+        }
+    }
+    
+    //MARK: UI Setup
+    
     private func setupSubViews() {
         setupLogoLabel()
         setupCreateAccountButton()
@@ -98,7 +149,7 @@ class LoginViewController: UIViewController {
     
     private func setupLogoLabel() {
         view.addSubview(logoLabel)
-
+        
         logoLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([logoLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 60), logoLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16), logoLabel.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16)])
     }
@@ -122,8 +173,8 @@ class LoginViewController: UIViewController {
         
         createAccountButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([createAccountButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-          createAccountButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-          createAccountButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-          createAccountButton.heightAnchor.constraint(equalToConstant: 50)])
+                                     createAccountButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                                     createAccountButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+                                     createAccountButton.heightAnchor.constraint(equalToConstant: 50)])
     }
 }
