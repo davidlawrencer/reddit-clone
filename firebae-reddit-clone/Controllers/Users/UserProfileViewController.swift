@@ -22,7 +22,7 @@ class UserProfileViewController: UIViewController {
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .lightGray
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifier.userHeaderCel.rawValue)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifier.userHeaderCell.rawValue)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifier.commentCell.rawValue)
         return tableView
     }()
