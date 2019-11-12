@@ -71,6 +71,10 @@ class FirestoreService {
     }
     
     //MARK: Comments
+    func createComment(comment: Comment, completion: @escaping (Result<(), Error>) -> ()) {
+        
+    }
+    
     func getComments(forPostID: String, completion: @escaping (Result<[Comment], Error>) -> ()) {
         
     }

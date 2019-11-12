@@ -9,14 +9,19 @@
 import Foundation
 
 struct Comment {
-    let title: String
+    private let postTitle: String
+    var displayTitle: String {
+        get {
+            return "re: \(postTitle)"
+        }
+    }
     let body: String
     let id: String
     let creatorID: String
     let postID: String
     
     init(title: String, body: String, creatorID: String, postID: String) {
-        self.title = title
+        self.postTitle = title
         self.body = body
         self.creatorID = creatorID
         self.postID = postID
@@ -30,7 +35,7 @@ struct Comment {
             let postID = dict["postID"] as? String else {
                 return nil
         }
-        self.title = title
+        self.postTitle = title
         self.body = body
         self.creatorID = userID
         self.postID = postID
@@ -39,7 +44,7 @@ struct Comment {
     
     var fieldsDict: [String: Any] {
         return [
-            "title": self.title,
+            "title": self.postTitle,
             "body": self.body,
             "creatorID": self.creatorID,
             "postID": self.postID,
