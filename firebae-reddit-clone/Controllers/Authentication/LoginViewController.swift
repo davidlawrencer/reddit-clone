@@ -100,6 +100,8 @@ class LoginViewController: UIViewController {
             return
         }
         
+        //MARK: TODO - remove whitespace (if any) from email/password
+        
         guard email.isValidEmail else {
             showAlert(with: "Error", and: "Please enter a valid email")
             return

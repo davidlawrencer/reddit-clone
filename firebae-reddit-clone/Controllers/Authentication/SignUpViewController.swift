@@ -129,6 +129,8 @@ class SignUpViewController: UIViewController {
         DispatchQueue.main.async {
             switch result {
             case .success(let user):
+                
+                //MARK: TODO - move this logic to the server
                 FirestoreService.manager.createAppUser(user: AppUser(from: user)) { [weak self] newResult in
                     self?.handleCreatedUserInFirestore(result: newResult)
                 }

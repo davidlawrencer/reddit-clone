@@ -43,7 +43,9 @@ class PostDetailViewController: UIViewController {
 
         let submitAction = UIAlertAction(title: "Submit", style: .default) { [weak alertController, weak self] _ in
             guard let commentText = alertController?.textFields?[0].text, commentText != "", let title = self?.post.title, let postID = self?.post.id, let userID = FirebaseAuthService.manager.currentUser?.uid else {return}
+            
             let comment = Comment(title: title, body: commentText, creatorID: userID, postID: postID)
+            
             FirestoreService.manager.createComment(comment: comment) { (result) in
                 switch result {
                 case .success(_):
