@@ -15,7 +15,9 @@ class UserProfileViewController: UIViewController {
     
     var posts = [Post]() {
         didSet {
-            tableView.reloadSections(IndexSet(integer: 1), with: .none)
+            DispatchQueue.main.async { [weak self] in
+                self?.tableView.reloadSections(IndexSet(integer: 1), with: .none)
+            }
         }
     }
     
@@ -23,7 +25,7 @@ class UserProfileViewController: UIViewController {
         let tableView = UITableView()
         tableView.backgroundColor = .lightGray
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifier.userHeaderCell.rawValue)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifier.commentCell.rawValue)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifier.postListCell.rawValue)
         return tableView
     }()
     
@@ -32,9 +34,27 @@ class UserProfileViewController: UIViewController {
         setupTableView()
         setupNavigation()
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getPostsForThisUser()
+    }
     
     @objc private func editProfile() {
         //MARK: TODO - Edit User VC
+    }
+    
+    private func getPostsForThisUser() {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            FirestoreService.manager.getPosts(forUserID: self?.user.uid ?? "") { (result) in
+                switch result {
+                case .success(let posts):
+                    self?.posts = posts
+                case .failure(let error):
+                    print(":( \(error)")
+                }
+            }
+        }
     }
     
     private func setupNavigation() {
@@ -72,8 +92,18 @@ extension UserProfileViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        UITableViewCell()
+        
+        switch indexPath.section {
+        case 0:
+            return UITableViewCell()
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.postListCell.rawValue, for: indexPath)
+            let post = posts[indexPath.row]
+            cell.textLabel?.text = post.title
+            cell.detailTextLabel?.text = post.body
+            return cell
+        default:
+            return UITableViewCell()
+        }
     }
-    
-    
 }
