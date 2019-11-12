@@ -14,7 +14,9 @@ class PostDetailViewController: UIViewController {
     
     var comments = [Comment]() {
         didSet {
-            tableView.reloadSections(IndexSet(integer: 1), with: .none)
+            DispatchQueue.main.async {
+                self.tableView.reloadSections(IndexSet(integer: 1), with: .none)
+            }
         }
     }
     
@@ -49,9 +51,11 @@ class PostDetailViewController: UIViewController {
             FirestoreService.manager.createComment(comment: comment) { (result) in
                 switch result {
                 case .success(_):
-                    print("success!")
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        self?.loadComments()
+                    }
                 case .failure(let error):
-                    print("error")
+                    print("error: \(error)")
                 }
             }
         }

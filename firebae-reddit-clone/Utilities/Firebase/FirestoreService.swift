@@ -89,12 +89,23 @@ class FirestoreService {
     }
     
     func getComments(forPostID: String, completion: @escaping (Result<[Comment], Error>) -> ()) {
-        
+        db.collection(FireStoreCollections.comments.rawValue).whereField("postID", isEqualTo: forPostID).getDocuments { (snapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                let comments = snapshot?.documents.compactMap({ (snapshot) -> Comment? in
+                    let commentID = snapshot.documentID
+                    let comment = Comment(from: snapshot.data(), id: commentID)
+                    return comment
+                })
+                completion(.success(comments ?? []))
+            }
+        }
     }
-    
-    func getComments(forUserID: String, completion: @escaping (Result<[Comment], Error>) -> ()) {
         
-    }
-    
-    private init () {}
+        func getComments(forUserID: String, completion: @escaping (Result<[Comment], Error>) -> ()) {
+            
+        }
+        
+        private init () {}
 }
