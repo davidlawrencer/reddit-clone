@@ -29,6 +29,18 @@ class FirebaseAuthService {
         }
     }
     
+    func updateUserNameField(userName: String, completion: @escaping (Result<(),Error>) -> ()){
+        let changeRequest = auth.currentUser?.createProfileChangeRequest()
+        changeRequest?.displayName = userName
+        changeRequest?.commitChanges(completion: { (error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        })
+    }
+    
     func loginUser(email: String, password: String, completion: @escaping (Result<User, Error>) -> ()) {
         auth.signIn(withEmail: email, password: password) { (result, error) in
             if let user = result?.user {

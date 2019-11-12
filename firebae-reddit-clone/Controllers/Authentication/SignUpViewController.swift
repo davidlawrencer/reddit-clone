@@ -126,21 +126,31 @@ class SignUpViewController: UIViewController {
     }
     
     private func handleCreateAccountResponse(with result: Result<User, Error>) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
             switch result {
             case .success(let user):
                 
-                //MARK: TODO - move this logic to the server
-                FirestoreService.manager.createAppUser(user: AppUser(from: user)) { [weak self] newResult in
-                    self?.handleCreatedUserInFirestore(result: newResult)
+                guard let userName = self?.userNameTextField.text else {
+                    self?.showAlert(with: "Error creating user", and: "An error occured while creating new account")
+                    return
+                }
+                FirebaseAuthService.manager.updateUserNameField(userName: userName) { (result) in
+                    self?.handleUpdatedUserPropertiesInAuth(user: user, result: result)
                 }
             case .failure(let error):
-                self.showAlert(with: "Error creating user", and: "An error occured while creating new account \(error)")
+                self?.showAlert(with: "Error creating user", and: "An error occured while creating new account \(error)")
             }
         }
     }
     
-    private func handleCreatedUserInFirestore(result: Result<Void, Error>) {
+    private func handleUpdatedUserPropertiesInAuth(user: User, result: Result<(), Error>) {
+        //MARK: TODO - move this logic to the server\
+        FirestoreService.manager.createAppUser(user: AppUser(from: user)) { [weak self] newResult in
+            self?.handleCreatedUserInFirestore(result: newResult)
+        }
+    }
+    
+    private func handleCreatedUserInFirestore(result: Result<(), Error>) {
         switch result {
         case .success:
             guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
