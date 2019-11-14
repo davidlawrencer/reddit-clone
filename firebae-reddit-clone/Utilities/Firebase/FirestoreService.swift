@@ -22,7 +22,9 @@ class FirestoreService {
     
     //MARK: AppUsers
     func createAppUser(user: AppUser, completion: @escaping (Result<(), Error>) -> ()) {
-        db.collection(FireStoreCollections.users.rawValue).document(user.uid).setData(user.fieldsDict) { (error) in
+        var fields = user.fieldsDict
+        fields["dateCreated"] = Date()
+        db.collection(FireStoreCollections.users.rawValue).document(user.uid).setData(fields) { (error) in
             if let error = error {
                 completion(.failure(error))
                 print(error)
@@ -48,6 +50,8 @@ class FirestoreService {
     
     //MARK: Posts
     func createPost(post: Post, completion: @escaping (Result<(), Error>) -> ()) {
+        var fields = post.fieldsDict
+        fields["dateCreated"] = Date()
         db.collection(FireStoreCollections.posts.rawValue).addDocument(data: post.fieldsDict) { (error) in
             if let error = error {
                 completion(.failure(error))
@@ -91,6 +95,8 @@ class FirestoreService {
     //MARK: Comments
     
     func createComment(comment: Comment, completion: @escaping (Result<(), Error>) -> ()) {
+        var fields = comment.fieldsDict
+        fields["dateCreated"] = Date()
         db.collection(FireStoreCollections.comments.rawValue).addDocument(data: comment.fieldsDict) { (error) in
             if let error = error {
                 completion(.failure(error))
