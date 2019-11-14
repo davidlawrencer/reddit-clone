@@ -130,13 +130,16 @@ class LoginViewController: UIViewController {
         case .failure(let error):
             showAlert(with: "Error", and: "Could not log in. Error: \(error)")
         case .success:
+            
             guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                let sceneDelegate = windowScene.delegate as? SceneDelegate
+                let sceneDelegate = windowScene.delegate as? SceneDelegate, let window = sceneDelegate.window
                 else {
+                    //MARK: TODO - handle could not swap root view controller
                     return
             }
-            UIView.transition(with: self.view, duration: 0.1, options: .transitionFlipFromBottom, animations: {
-                sceneDelegate.window?.rootViewController = RedditTabBarViewController()
+
+            UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromBottom, animations: {
+                window.rootViewController = RedditTabBarViewController()
             }, completion: nil)
         }
     }

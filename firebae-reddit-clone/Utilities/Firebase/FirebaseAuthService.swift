@@ -16,7 +16,6 @@ class FirebaseAuthService {
 
     var currentUser: User? {
         return auth.currentUser
-
     }
     
     func createNewUser(email: String, password: String, completion: @escaping (Result<User,Error>) -> ()) {

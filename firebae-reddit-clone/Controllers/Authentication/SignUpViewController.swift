@@ -12,7 +12,7 @@ import FirebaseAuth
 class SignUpViewController: UIViewController {
     
     //MARK: UI Objects
-
+    
     lazy var headerLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -134,7 +134,7 @@ class SignUpViewController: UIViewController {
                     self?.showAlert(with: "Error creating user", and: "An error occured while creating new account")
                     return
                 }
-                FirebaseAuthService.manager.updateUserNameField(userName: userName) { (result) in
+                FirebaseAuthService.manager.updateUserFields(userName: userName) { (result) in
                     self?.handleUpdatedUserPropertiesInAuth(user: user, result: result)
                 }
             case .failure(let error):
@@ -154,22 +154,22 @@ class SignUpViewController: UIViewController {
         switch result {
         case .success:
             guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                let sceneDelegate = windowScene.delegate as? SceneDelegate
+                let sceneDelegate = windowScene.delegate as? SceneDelegate, let window = sceneDelegate.window
                 else {
-                    self.dismiss(animated: true, completion: nil)
+                    //MARK: TODO - handle could not swap root view controller
                     return
             }
             
-            UIView.transition(with: self.view, duration: 0.1, options: .transitionFlipFromBottom, animations: {
-                sceneDelegate.window?.rootViewController = RedditTabBarViewController()
+            UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromBottom, animations: {
+                window.rootViewController = RedditTabBarViewController()
             }, completion: nil)
         case .failure(let error):
             self.showAlert(with: "Error creating user", and: "An error occured while creating new account \(error)")
         }
     }
-        
+    
     //MARK: UI Setup
-
+    
     private func setupHeaderLabel() {
         view.addSubview(headerLabel)
         
