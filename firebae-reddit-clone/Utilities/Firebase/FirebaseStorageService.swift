@@ -16,7 +16,7 @@ class FirebaseStorageService {
     private let storageReference: StorageReference
     private let imagesFolderReference: StorageReference
     
-    init() {
+    private init() {
         storage = Storage.storage()
         storageReference = storage.reference()
         imagesFolderReference = storageReference.child("images")

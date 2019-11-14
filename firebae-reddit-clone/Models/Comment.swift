@@ -22,6 +22,8 @@ struct Comment {
     let postID: String
     let dateCreated: Date?
     
+
+    //Creating an instance of this object in swift to use in our app
     init(title: String, body: String, creatorID: String, postID: String, dateCreated: Date? = nil) {
         self.postTitle = title
         self.body = body
@@ -31,6 +33,7 @@ struct Comment {
         self.dateCreated = dateCreated
     }
     
+    //Custom decoding FROM firestore
     init?(from dict: [String: Any], id: String) {
         guard let title = dict["title"] as? String,
             let body = dict["body"] as? String,
@@ -46,6 +49,7 @@ struct Comment {
         self.dateCreated = dateCreated
     }
     
+    //Custom encoding FOR firestore
     var fieldsDict: [String: Any] {
         return [
             "title": self.postTitle,

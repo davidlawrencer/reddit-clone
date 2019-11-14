@@ -15,6 +15,11 @@ enum FireStoreCollections: String {
     case comments
 }
 
+enum SortingCriteria: String {
+    case dateCreated
+}
+
+
 class FirestoreService {    
     static let manager = FirestoreService()
     
@@ -48,6 +53,8 @@ class FirestoreService {
             updateFields["photoURL"] = photo.absoluteString
         }
         
+       
+        //PUT request
         db.collection(FireStoreCollections.users.rawValue).document(userId).updateData(updateFields) { (error) in
             if let error = error {
                 completion(.failure(error))

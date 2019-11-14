@@ -133,7 +133,7 @@ class ProfileEditViewController: UIViewController {
             imagePickerViewController.delegate = self
             imagePickerViewController.sourceType = .photoLibrary
             imagePickerViewController.allowsEditing = true
-            imagePickerViewController.mediaTypes = ["public.image", "public.movie"]
+            imagePickerViewController.mediaTypes = ["public.image"]
             self.present(imagePickerViewController, animated: true, completion: nil)
         }
     }
