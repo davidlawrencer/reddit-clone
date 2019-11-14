@@ -12,6 +12,8 @@
 		54572802237AAAF20077A359 /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54572801237AAAF20077A359 /* CreatePostViewController.swift */; };
 		54572804237AAAFC0077A359 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54572803237AAAFC0077A359 /* PostDetailViewController.swift */; };
 		54572808237AACB50077A359 /* RedditTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54572807237AACB50077A359 /* RedditTabBarViewController.swift */; };
+		54572813237C83FF0077A359 /* ProfileSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54572812237C83FF0077A359 /* ProfileSetupViewController.swift */; };
+		54572815237C8E070077A359 /* FirebaseStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54572814237C8E070077A359 /* FirebaseStorageService.swift */; };
 		54629438237A6CF7001BDC6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54629437237A6CF7001BDC6B /* AppDelegate.swift */; };
 		5462943A237A6CF7001BDC6B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54629439237A6CF7001BDC6B /* SceneDelegate.swift */; };
 		5462943C237A6CF7001BDC6B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5462943B237A6CF7001BDC6B /* LoginViewController.swift */; };
@@ -37,6 +39,8 @@
 		54572801237AAAF20077A359 /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
 		54572803237AAAFC0077A359 /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		54572807237AACB50077A359 /* RedditTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditTabBarViewController.swift; sourceTree = "<group>"; };
+		54572812237C83FF0077A359 /* ProfileSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileSetupViewController.swift; path = "firebae-reddit-clone/Controllers/Users/ProfileSetupViewController.swift"; sourceTree = SOURCE_ROOT; };
+		54572814237C8E070077A359 /* FirebaseStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageService.swift; sourceTree = "<group>"; };
 		54629434237A6CF7001BDC6B /* firebae-reddit-clone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "firebae-reddit-clone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		54629437237A6CF7001BDC6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		54629439237A6CF7001BDC6B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +85,7 @@
 		54572809237AB4F20077A359 /* Users */ = {
 			isa = PBXGroup;
 			children = (
+				54572812237C83FF0077A359 /* ProfileSetupViewController.swift */,
 				545727FD237AAAD80077A359 /* UsersListViewController.swift */,
 				545727FF237AAAE50077A359 /* UserProfileViewController.swift */,
 			);
@@ -165,6 +170,7 @@
 			children = (
 				54629451237A8031001BDC6B /* FirebaseAuthService.swift */,
 				54629458237A83CE001BDC6B /* FirestoreService.swift */,
+				54572814237C8E070077A359 /* FirebaseStorageService.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -326,6 +332,7 @@
 				5462943C237A6CF7001BDC6B /* LoginViewController.swift in Sources */,
 				54572802237AAAF20077A359 /* CreatePostViewController.swift in Sources */,
 				5462944C237A6DCD001BDC6B /* String+Validations.swift in Sources */,
+				54572815237C8E070077A359 /* FirebaseStorageService.swift in Sources */,
 				54629460237A8A4A001BDC6B /* Post.swift in Sources */,
 				54629466237A9554001BDC6B /* Comment.swift in Sources */,
 				54572800237AAAE50077A359 /* UserProfileViewController.swift in Sources */,
@@ -334,6 +341,7 @@
 				54572804237AAAFC0077A359 /* PostDetailViewController.swift in Sources */,
 				5462943A237A6CF7001BDC6B /* SceneDelegate.swift in Sources */,
 				5462946C237A9D9C001BDC6B /* PostsListViewController.swift in Sources */,
+				54572813237C83FF0077A359 /* ProfileSetupViewController.swift in Sources */,
 				54629452237A8031001BDC6B /* FirebaseAuthService.swift in Sources */,
 				54572808237AACB50077A359 /* RedditTabBarViewController.swift in Sources */,
 				5462944E237A793B001BDC6B /* SignUpViewController.swift in Sources */,

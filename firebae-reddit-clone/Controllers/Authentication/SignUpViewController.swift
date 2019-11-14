@@ -46,18 +46,7 @@ class SignUpViewController: UIViewController {
         textField.addTarget(self, action: #selector(validateFields), for: .editingChanged)
         return textField
     }()
-    
-    lazy var userNameTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Enter User Name"
-        textField.font = UIFont(name: "Verdana", size: 14)
-        textField.backgroundColor = .white
-        textField.borderStyle = .bezel
-        textField.autocorrectionType = .no
-        textField.addTarget(self, action: #selector(validateFields), for: .editingChanged)
-        return textField
-    }()
-    
+        
     lazy var createButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Create", for: .normal)
@@ -82,7 +71,7 @@ class SignUpViewController: UIViewController {
     //MARK: Obj-C Methods
     
     @objc func validateFields() {
-        guard emailTextField.hasText, passwordTextField.hasText,  userNameTextField.hasText else {
+        guard emailTextField.hasText, passwordTextField.hasText else {
             createButton.backgroundColor = UIColor(red: 255/255, green: 67/255, blue: 0/255, alpha: 0.5)
             createButton.isEnabled = false
             return
@@ -107,11 +96,6 @@ class SignUpViewController: UIViewController {
             return
         }
         
-        guard userNameTextField.hasText else {
-            showAlert(with: "Error", and: "Please enter a valid user name.")
-            return
-        }
-        
         FirebaseAuthService.manager.createNewUser(email: email.lowercased(), password: password) { [weak self] (result) in
             self?.handleCreateAccountResponse(with: result)
         }
@@ -129,24 +113,12 @@ class SignUpViewController: UIViewController {
         DispatchQueue.main.async { [weak self] in
             switch result {
             case .success(let user):
-                
-                guard let userName = self?.userNameTextField.text else {
-                    self?.showAlert(with: "Error creating user", and: "An error occured while creating new account")
-                    return
-                }
-                FirebaseAuthService.manager.updateUserFields(userName: userName) { (result) in
-                    self?.handleUpdatedUserPropertiesInAuth(user: user, result: result)
+                FirestoreService.manager.createAppUser(user: AppUser(from: user)) { [weak self] newResult in
+                    self?.handleCreatedUserInFirestore(result: newResult)
                 }
             case .failure(let error):
                 self?.showAlert(with: "Error creating user", and: "An error occured while creating new account \(error)")
             }
-        }
-    }
-    
-    private func handleUpdatedUserPropertiesInAuth(user: User, result: Result<(), Error>) {
-        //MARK: TODO - move this logic to the server\
-        FirestoreService.manager.createAppUser(user: AppUser(from: user)) { [weak self] newResult in
-            self?.handleCreatedUserInFirestore(result: newResult)
         }
     }
     
@@ -160,6 +132,7 @@ class SignUpViewController: UIViewController {
                     return
             }
             
+            //MARK: TODO - refactor this logic into scene delegate
             UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromBottom, animations: {
                 window.rootViewController = RedditTabBarViewController()
             }, completion: nil)
@@ -178,7 +151,7 @@ class SignUpViewController: UIViewController {
     }
     
     private func setupCreateStackView() {
-        let stackView = UIStackView(arrangedSubviews: [emailTextField,passwordTextField,userNameTextField,createButton])
+        let stackView = UIStackView(arrangedSubviews: [emailTextField,passwordTextField,createButton])
         stackView.axis = .vertical
         stackView.spacing = 15
         stackView.distribution = .fillEqually

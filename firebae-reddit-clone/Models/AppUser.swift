@@ -34,6 +34,6 @@ struct AppUser {
         return [
             "userName": self.userName ?? "",
             "email": self.email ?? ""
-            ]
+        ]
     }
 }

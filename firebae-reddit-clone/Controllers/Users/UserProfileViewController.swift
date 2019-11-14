@@ -24,6 +24,7 @@ class UserProfileViewController: UIViewController {
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .lightGray
+        //MARK: TODO - set up custom cells
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifier.userHeaderCell.rawValue)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifier.postListCell.rawValue)
         return tableView
@@ -41,7 +42,7 @@ class UserProfileViewController: UIViewController {
     }
     
     @objc private func editProfile() {
-        //MARK: TODO - Edit User VC
+        navigationController?.pushViewController(ProfileEditViewController(), animated: true)
     }
     
     private func getPostsForThisUser() {

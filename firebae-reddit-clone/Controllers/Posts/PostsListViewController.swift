@@ -20,6 +20,8 @@ class PostsListViewController: UIViewController {
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .lightGray
+        
+        //MARK: TODO - set up custom cells
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifier.postListCell.rawValue)
         return tableView
     }()

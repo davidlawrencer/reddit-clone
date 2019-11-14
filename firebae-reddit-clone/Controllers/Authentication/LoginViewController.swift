@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 class LoginViewController: UIViewController {
     
@@ -125,7 +124,7 @@ class LoginViewController: UIViewController {
         present(alertVC, animated: true, completion: nil)
     }
     
-    private func handleLoginResponse(with result: Result<User, Error>) {
+    private func handleLoginResponse(with result: Result<(), Error>) {
         switch result {
         case .failure(let error):
             showAlert(with: "Error", and: "Could not log in. Error: \(error)")
@@ -137,9 +136,18 @@ class LoginViewController: UIViewController {
                     //MARK: TODO - handle could not swap root view controller
                     return
             }
-
+            
+            //MARK: TODO - refactor this logic into scene delegate
             UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromBottom, animations: {
-                window.rootViewController = RedditTabBarViewController()
+                if FirebaseAuthService.manager.currentUser?.photoURL != nil {
+                    window.rootViewController = RedditTabBarViewController()
+                } else {
+                    window.rootViewController = {
+                        let profileSetupVC = ProfileEditViewController()
+                        profileSetupVC.settingFromLogin = true
+                        return profileSetupVC
+                    }()
+                }
             }, completion: nil)
         }
     }

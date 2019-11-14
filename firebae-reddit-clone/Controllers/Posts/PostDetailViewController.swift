@@ -23,6 +23,7 @@ class PostDetailViewController: UIViewController {
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .lightGray
+        //MARK: TODO - set up custom cells
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifier.postHeaderCell.rawValue)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifier.commentCell.rawValue)
         return tableView
@@ -130,13 +131,25 @@ extension PostDetailViewController: UITableViewDataSource {
             cell.detailTextLabel?.text = post.body
             return cell
         case 1:
+
             let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.commentCell.rawValue, for: indexPath)
             let comment = comments[indexPath.row]
-            cell.textLabel?.text = comment.displayTitle
-            cell.detailTextLabel?.text = comment.body
             return cell
         default:
             return UITableViewCell()
+        }
+    }
+}
+
+extension PostDetailViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.row {
+        case 0:
+            return 100
+        case 1:
+            return 70
+        default:
+            return 0
         }
     }
 }
