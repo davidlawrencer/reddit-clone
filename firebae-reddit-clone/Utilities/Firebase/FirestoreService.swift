@@ -48,7 +48,7 @@ class FirestoreService {
             updateFields["photoURL"] = photo.absoluteString
         }
         
-        db.collection(FireStoreCollections.users.rawValue).document(userId).setData(updateFields) { (error) in
+        db.collection(FireStoreCollections.users.rawValue).document(userId).updateData(updateFields) { (error) in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -77,7 +77,7 @@ class FirestoreService {
     func createPost(post: Post, completion: @escaping (Result<(), Error>) -> ()) {
         var fields = post.fieldsDict
         fields["dateCreated"] = Date()
-        db.collection(FireStoreCollections.posts.rawValue).addDocument(data: post.fieldsDict) { (error) in
+        db.collection(FireStoreCollections.posts.rawValue).addDocument(data: fields) { (error) in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -122,7 +122,7 @@ class FirestoreService {
     func createComment(comment: Comment, completion: @escaping (Result<(), Error>) -> ()) {
         var fields = comment.fieldsDict
         fields["dateCreated"] = Date()
-        db.collection(FireStoreCollections.comments.rawValue).addDocument(data: comment.fieldsDict) { (error) in
+        db.collection(FireStoreCollections.comments.rawValue).addDocument(data: fields) { (error) in
             if let error = error {
                 completion(.failure(error))
             } else {

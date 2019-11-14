@@ -134,7 +134,15 @@ class SignUpViewController: UIViewController {
             
             //MARK: TODO - refactor this logic into scene delegate
             UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromBottom, animations: {
-                window.rootViewController = RedditTabBarViewController()
+                if FirebaseAuthService.manager.currentUser?.photoURL != nil {
+                    window.rootViewController = RedditTabBarViewController()
+                } else {
+                    window.rootViewController = {
+                        let profileSetupVC = ProfileEditViewController()
+                        profileSetupVC.settingFromLogin = true
+                        return profileSetupVC
+                    }()
+                }
             }, completion: nil)
         case .failure(let error):
             self.showAlert(with: "Error creating user", and: "An error occured while creating new account \(error)")
