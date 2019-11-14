@@ -33,6 +33,31 @@ class FirestoreService {
         }
     }
     
+    func updateCurrentUser(userName: String? = nil, photoURL: URL? = nil, completion: @escaping (Result<(), Error>) -> ()){
+        guard let userId = FirebaseAuthService.manager.currentUser?.uid else {
+            //MARK: TODO - handle can't get current user
+            return
+        }
+        var updateFields = [String:Any]()
+        
+        if let user = userName {
+            updateFields["userName"] = user
+        }
+        
+        if let photo = photoURL {
+            updateFields["photoURL"] = photo.absoluteString
+        }
+        
+        db.collection(FireStoreCollections.users.rawValue).document(userId).setData(updateFields) { (error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+            
+        }
+    }
+    
     func getAllUsers(completion: @escaping (Result<[AppUser], Error>) -> ()) {
         db.collection(FireStoreCollections.users.rawValue).getDocuments { (snapshot, error) in
             if let error = error {
@@ -120,10 +145,10 @@ class FirestoreService {
             }
         }
     }
+    
+    func getComments(forUserID: String, completion: @escaping (Result<[Comment], Error>) -> ()) {
         
-        func getComments(forUserID: String, completion: @escaping (Result<[Comment], Error>) -> ()) {
-            
-        }
-        
-        private init () {}
+    }
+    
+    private init () {}
 }

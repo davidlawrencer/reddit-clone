@@ -71,22 +71,33 @@ class ProfileEditViewController: UIViewController {
     }
     
     @objc private func savePressed(){
-        //MARK: WIP. TODO - in completion handler success case, update user photo both in auth and in firestore collection
-        if settingFromLogin {
-            //MARK: TODO - refactor this logic into scene delegate
-            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                let sceneDelegate = windowScene.delegate as? SceneDelegate, let window = sceneDelegate.window
-                else {
-                    //MARK: TODO - handle could not swap root view controller
-                    return
-            }
-            UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromBottom, animations: {
-                window.rootViewController = RedditTabBarViewController()
-            }, completion: nil)
-        } else {
-            self.navigationController?.popViewController(animated: true)
+        guard let userName = userNameTextField.text, let imageURL = imageURL else {
+            //MARK: TODO - alert
+            return
         }
-        showAlert(with: "No Image Added", and: "Please add an image")
+                
+        FirebaseAuthService.manager.updateUserFields(userName: userName, photoURL: imageURL) { (result) in
+            switch result {
+            case .success():
+                FirestoreService.manager.updateCurrentUser(userName: userName, photoURL: imageURL) { [weak self] (nextResult) in
+                    switch nextResult {
+                    case .success():
+                        self?.handleNavigationAwayFromVC()
+                    case .failure(let error):
+                        //MARK: TODO - handle
+                        
+                        //Discussion - if can't update on user object in collection, our firestore object will not match what is in auth. should we:
+                        // 1. Re-try the save?
+                        // 2. Revert the changes on the auth user?
+                        // This reconciliation should all be handled on the server side, but having to handle here, we could run into an infinite loop when re-saving.
+                        print(error)
+                    }
+                }
+            case .failure(let error):
+                //MARK: TODO - handle
+                print(error)
+            }
+        }
     }
     
     @objc private func addImagePressed() {
@@ -124,6 +135,23 @@ class ProfileEditViewController: UIViewController {
             imagePickerViewController.allowsEditing = true
             imagePickerViewController.mediaTypes = ["public.image", "public.movie"]
             self.present(imagePickerViewController, animated: true, completion: nil)
+        }
+    }
+    
+    private func handleNavigationAwayFromVC() {
+        if settingFromLogin {
+            //MARK: TODO - refactor this logic into scene delegate
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                let sceneDelegate = windowScene.delegate as? SceneDelegate, let window = sceneDelegate.window
+                else {
+                    //MARK: TODO - handle could not swap root view controller
+                    return
+            }
+            UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromBottom, animations: {
+                window.rootViewController = RedditTabBarViewController()
+            }, completion: nil)
+        } else {
+            self.navigationController?.popViewController(animated: true)
         }
     }
     
