@@ -19,6 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = scene
+
+        //MARK: TODO - switch root view controller on firebase current user.
+        //Discussion - is the iOS currentUser object token-safe with the authentication service?
         window?.rootViewController = LoginViewController()
         window?.makeKeyAndVisible()
     }
