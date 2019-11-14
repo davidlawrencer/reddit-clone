@@ -70,6 +70,7 @@ class UserProfileViewController: UIViewController {
         view.addSubview(tableView)
         tableView.backgroundColor = .lightGray
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor), tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor), tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor), tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)])
     }
@@ -105,6 +106,17 @@ extension UserProfileViewController: UITableViewDataSource {
             return cell
         default:
             return UITableViewCell()
+        }
+    }
+}
+
+extension UserProfileViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            let post = posts[indexPath.row]
+            let postDetailVC = PostDetailViewController()
+            postDetailVC.post = post
+            self.navigationController?.pushViewController(postDetailVC, animated: true)
         }
     }
 }
