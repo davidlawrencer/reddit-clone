@@ -46,7 +46,7 @@ class SignUpViewController: UIViewController {
         textField.addTarget(self, action: #selector(validateFields), for: .editingChanged)
         return textField
     }()
-        
+    
     lazy var createButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Create", for: .normal)
@@ -155,7 +155,11 @@ class SignUpViewController: UIViewController {
         view.addSubview(headerLabel)
         
         headerLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([headerLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 30), headerLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16), headerLabel.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16), headerLabel.heightAnchor.constraint(lessThanOrEqualTo: self.view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.08)])
+        NSLayoutConstraint.activate([
+            headerLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            headerLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            headerLabel.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            headerLabel.heightAnchor.constraint(lessThanOrEqualTo: self.view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.08)])
     }
     
     private func setupCreateStackView() {
@@ -166,6 +170,9 @@ class SignUpViewController: UIViewController {
         self.view.addSubview(stackView)
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([stackView.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: 100), stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16), stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)])
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: 100),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)])
     }
 }

@@ -60,8 +60,13 @@ class LoginViewController: UIViewController {
     
     lazy var createAccountButton: UIButton = {
         let button = UIButton(type: .system)
-        let attributedTitle = NSMutableAttributedString(string: "Dont have an account?  ", attributes: [NSAttributedString.Key.font: UIFont(name: "Verdana", size: 14)!, NSAttributedString.Key.foregroundColor: UIColor.white])
-        attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [NSAttributedString.Key.font: UIFont(name: "Verdana-Bold", size: 14)!, NSAttributedString.Key.foregroundColor:  UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)]))
+        let attributedTitle = NSMutableAttributedString(string: "Dont have an account?  ",
+                                                        attributes: [
+                                                            NSAttributedString.Key.font: UIFont(name: "Verdana", size: 14)!,
+                                                            NSAttributedString.Key.foregroundColor: UIColor.white])
+        attributedTitle.append(NSAttributedString(string: "Sign Up",
+                                                  attributes: [NSAttributedString.Key.font: UIFont(name: "Verdana-Bold", size: 14)!,
+                                                               NSAttributedString.Key.foregroundColor:  UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)]))
         button.setAttributedTitle(attributedTitle, for: .normal)
         button.addTarget(self, action: #selector(showSignUp), for: .touchUpInside)
         return button
@@ -164,7 +169,10 @@ class LoginViewController: UIViewController {
         view.addSubview(logoLabel)
         
         logoLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([logoLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 60), logoLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16), logoLabel.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16)])
+        NSLayoutConstraint.activate([
+            logoLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 60),
+            logoLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            logoLabel.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16)])
     }
     
     private func setupLoginStackView() {
@@ -175,19 +183,21 @@ class LoginViewController: UIViewController {
         self.view.addSubview(stackView)
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([stackView.bottomAnchor.constraint(equalTo: createAccountButton.topAnchor, constant: -50),
-                                     stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                                     stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                                     stackView.heightAnchor.constraint(equalToConstant: 130)])
+        NSLayoutConstraint.activate([
+            stackView.bottomAnchor.constraint(equalTo: createAccountButton.topAnchor, constant: -50),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            stackView.heightAnchor.constraint(equalToConstant: 130)])
     }
     
     private func setupCreateAccountButton() {
         view.addSubview(createAccountButton)
         
         createAccountButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([createAccountButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                                     createAccountButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                                     createAccountButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-                                     createAccountButton.heightAnchor.constraint(equalToConstant: 50)])
+        NSLayoutConstraint.activate([
+            createAccountButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            createAccountButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            createAccountButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            createAccountButton.heightAnchor.constraint(equalToConstant: 50)])
     }
 }

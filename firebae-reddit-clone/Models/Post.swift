@@ -28,9 +28,8 @@ struct Post {
         guard let title = dict["title"] as? String,
             let body = dict["body"] as? String,
             let userID = dict["creatorID"] as? String,
-            let dateCreated = (dict["dateCreated"] as? Timestamp)?.dateValue() else {
-                return nil
-        }
+            let dateCreated = (dict["dateCreated"] as? Timestamp)?.dateValue() else { return nil }
+        
         self.title = title
         self.body = body
         self.creatorID = userID

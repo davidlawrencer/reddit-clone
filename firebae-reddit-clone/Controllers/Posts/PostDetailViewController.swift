@@ -9,7 +9,7 @@
 import UIKit
 
 class PostDetailViewController: UIViewController {
-
+    
     var post: Post!
     
     var comments = [Comment]() {
@@ -43,7 +43,7 @@ class PostDetailViewController: UIViewController {
     @objc private func addButtonPressed() {
         let alertController = UIAlertController(title: "Add new comment", message: nil, preferredStyle: .alert)
         alertController.addTextField(configurationHandler: nil)
-
+        
         let submitAction = UIAlertAction(title: "Submit", style: .default) { [weak alertController, weak self] _ in
             guard let commentText = alertController?.textFields?[0].text, commentText != "", let title = self?.post.title, let postID = self?.post.id, let userID = FirebaseAuthService.manager.currentUser?.uid else {return}
             
@@ -62,20 +62,20 @@ class PostDetailViewController: UIViewController {
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-
+        
         alertController.addAction(submitAction)
         alertController.addAction(cancelAction)
         
         present(alertController, animated: true)
     }
-
+    
     private func loadComments(){
         FirestoreService.manager.getComments(forPostID: post.id) { [weak self] (result) in
             switch result {
             case .success(let comments):
                 self?.comments = comments
             case .failure(let error):
-                print("couldn't get comments for \(self?.post.id): \(error)")
+                print("couldn't get comments for \(self?.post.id ?? ""): \(error)")
             }
         }
     }
@@ -90,9 +90,13 @@ class PostDetailViewController: UIViewController {
         view.addSubview(tableView)
         tableView.backgroundColor = .lightGray
         tableView.dataSource = self
-
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor), tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor), tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor), tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)])
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)])
     }
 }
 
@@ -111,7 +115,7 @@ extension PostDetailViewController: UITableViewDataSource {
             return nil
         }
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
@@ -131,9 +135,11 @@ extension PostDetailViewController: UITableViewDataSource {
             cell.detailTextLabel?.text = post.body
             return cell
         case 1:
-
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.commentCell.rawValue, for: indexPath)
             let comment = comments[indexPath.row]
+            cell.textLabel?.text = comment.body
+            //MARK: TODO - use custom cell
             return cell
         default:
             return UITableViewCell()

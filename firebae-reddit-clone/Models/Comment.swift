@@ -37,6 +37,7 @@ struct Comment {
             let userID = dict["creatorID"] as? String,
             let postID = dict["postID"] as? String,
             let dateCreated = (dict["dateCreated"] as? Timestamp)?.dateValue() else { return nil }
+        
         self.postTitle = title
         self.body = body
         self.creatorID = userID

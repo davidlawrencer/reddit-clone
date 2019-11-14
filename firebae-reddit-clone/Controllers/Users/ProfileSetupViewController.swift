@@ -75,7 +75,7 @@ class ProfileEditViewController: UIViewController {
             //MARK: TODO - alert
             return
         }
-                
+        
         FirebaseAuthService.manager.updateUserFields(userName: userName, photoURL: imageURL) { (result) in
             switch result {
             case .success():

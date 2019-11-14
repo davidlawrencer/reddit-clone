@@ -9,7 +9,7 @@
 import UIKit
 
 class CreatePostViewController: UIViewController {
-
+    
     //MARK: UI Objects
     
     lazy var titleTextField: UITextField = {
@@ -32,7 +32,7 @@ class CreatePostViewController: UIViewController {
     }()
     
     lazy var postButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.setTitleColor(.white, for: .normal)
         button.showsTouchWhenHighlighted = true
         button.isEnabled = true
@@ -52,7 +52,7 @@ class CreatePostViewController: UIViewController {
         setupBodyTextView()
         setupPostButton()
     }
-
+    
     //MARK: Obj-C Methods
     
     @objc func postButtonPressed() {
@@ -75,20 +75,21 @@ class CreatePostViewController: UIViewController {
     //MARK: Private methods
     
     private func handlePostResponse(withResult result: Result<Void, Error>) {
-           switch result {
-           case .success:
-            
+        switch result {
+        case .success:
             let alertVC = UIAlertController(title: "Yay", message: "New post was added", preferredStyle: .alert)
+            
             alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { [weak self] (action)  in
                 DispatchQueue.main.async {
                     self?.navigationController?.popViewController(animated: true)
                 }
             }))
+            
             present(alertVC, animated: true, completion: nil)
-           case let .failure(error):
-               print("An error occurred creating the post: \(error)")
-           }
-       }
+        case let .failure(error):
+            print("An error occurred creating the post: \(error)")
+        }
+    }
     
     private func showAlert(with title: String, and message: String) {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -101,30 +102,30 @@ class CreatePostViewController: UIViewController {
     private func setupTitleTextField() {
         view.addSubview(titleTextField)
         titleTextField.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([titleTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
+        NSLayoutConstraint.activate([
+            titleTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
             titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             titleTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
             titleTextField.heightAnchor.constraint(equalToConstant: 40)])
-        
     }
     
     private func setupBodyTextView() {
         view.addSubview(bodyTextView)
         bodyTextView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([bodyTextView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 16),
-                                     bodyTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-                                     bodyTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-                                     bodyTextView.heightAnchor.constraint(equalToConstant: 180)])
+        NSLayoutConstraint.activate([
+            bodyTextView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 16),
+            bodyTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            bodyTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            bodyTextView.heightAnchor.constraint(equalToConstant: 180)])
     }
-    
-    
+
     private func setupPostButton() {
         view.addSubview(postButton)
         postButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([postButton.topAnchor.constraint(equalTo: bodyTextView.bottomAnchor, constant: 16),
-                                     postButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-                                     postButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-                                     postButton.heightAnchor.constraint(lessThanOrEqualToConstant: 50)])
+        NSLayoutConstraint.activate([
+            postButton.topAnchor.constraint(equalTo: bodyTextView.bottomAnchor, constant: 16),
+            postButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            postButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            postButton.heightAnchor.constraint(lessThanOrEqualToConstant: 50)])
     }
-    
 }
