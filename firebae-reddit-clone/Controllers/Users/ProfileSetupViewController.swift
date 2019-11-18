@@ -219,7 +219,7 @@ extension ProfileEditViewController: UIImagePickerControllerDelegate, UINavigati
         }
         self.image = image
         
-        guard let imageData = image.jpegData(compressionQuality: 1) else {
+        guard let imageData = image.jpegData(compressionQuality: 0.8) else {
             //MARK: TODO - gracefully fail out without interrupting UX
             return
         }

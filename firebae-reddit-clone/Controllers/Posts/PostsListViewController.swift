@@ -38,7 +38,7 @@ class PostsListViewController: UIViewController {
     }
     
     private func getPosts() {
-        FirestoreService.manager.getAllPosts { (result) in
+        FirestoreService.manager.getAllPosts(sortingCriteria: .fromNewestToOldest) { (result) in
             switch result {
             case .success(let posts):
                 self.posts = posts

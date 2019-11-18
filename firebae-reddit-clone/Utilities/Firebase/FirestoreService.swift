@@ -9,14 +9,20 @@
 import Foundation
 import FirebaseFirestore
 
-enum FireStoreCollections: String {
+fileprivate enum FireStoreCollections: String {
     case users
     case posts
     case comments
 }
 
 enum SortingCriteria: String {
-    case dateCreated
+    case fromNewestToOldest = "dateCreated"
+    var shouldSortDescending: Bool {
+        switch self {
+        case .fromNewestToOldest:
+            return true
+        }
+    }
 }
 
 
@@ -93,8 +99,8 @@ class FirestoreService {
         }
     }
     
-    func getAllPosts(completion: @escaping (Result<[Post], Error>) -> ()) {
-        db.collection(FireStoreCollections.posts.rawValue).getDocuments { (snapshot, error) in
+    func getAllPosts(sortingCriteria: SortingCriteria? = nil, completion: @escaping (Result<[Post], Error>) -> ()) {
+        let completionHandler: FIRQuerySnapshotBlock = {(snapshot, error) in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -105,6 +111,17 @@ class FirestoreService {
                 })
                 completion(.success(posts ?? []))
             }
+        }
+        
+        //type: Collection Reference
+        let collection = db.collection(FireStoreCollections.posts.rawValue)
+        //If i want to sort, or even to filter my collection, it's going to work with an instance of a different type - FIRQuery
+        //collection + sort/filter settings.getDocuments
+        if let sortingCriteria = sortingCriteria {
+            let query = collection.order(by:sortingCriteria.rawValue, descending: sortingCriteria.shouldSortDescending)
+            query.getDocuments(completion: completionHandler)
+        } else {
+            collection.getDocuments(completion: completionHandler)
         }
     }
     
